@@ -1,0 +1,203 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG path</title>
+    <link rel="stylesheet" href="https://bootswatch.com/5/minty/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <style>
+        .hidden{
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body style="font-family: Arial, Helvetica, sans-serif; line-height: 25px;">
+    <div style="padding: 20px 10%" id="main">
+        <!-- <div class="mb-3 row">
+            <h4>How to use</h6>
+                <p>1. Copy SVG code.<br>2. Paste it to the below box.<br>3. Adjust Roughness if needed. Click Get XY.
+                </p>
+        </div> -->
+        <div class="mb-3 row">
+            <textarea id="svg-input" cols="150" rows="10" class="form-control"></textarea>
+        </div>
+        <script>
+            onmessage = (message) => {
+                document.querySelector('#svg-input').innerHTML = message.data.pluginMessage.svgPath
+                $('#btn-getSVG').click()
+            }
+        </script>
+        <div class="mb-3 row">
+            <div class="col-auto">
+                <label for="num_roughness" class="col-sm-2 col-form-label">Roughness</label>
+            </div>
+            <div class="col-auto">
+                <input type="number" value="1" min="1" class="form-control" id="num_roughness">
+            </div>
+            <div class="col-2" style="text-align: right;">
+                <label for="num_roughness" class="col-form-label">Sub divise</label>
+            </div>
+            <div class="col-auto">
+                <input type="number" value="850" min="1" class="form-control" id="num_divise">
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-primary" id="btn-getSVG">GET XY</button>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <textarea id="svg-object" cols="150" rows="10" class="form-control"></textarea>
+        </div>
+        <div class="mb-3 row">
+            <div class="col-auto hidden">
+                <button type="button" class="btn btn-primary" id="btn-Copy">COPY</button>
+            </div>
+            <div class="col-2" style="text-align: right;">
+                <label for="num_roughness" class="col-form-label">JSON File Name</label>
+            </div>
+            <div class="col-auto">
+                <input type="text" class="form-control" id="fileName">
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-primary" id="btn-Download">DOWNLOAD JSON FILE</button>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <div id="SVG-path" style="border: 1px solid #9e9e9e; margin-bottom: 20px"></div>
+            <canvas id="roughSVG" width="1024px" height="800px" style="border: 1px solid #9e9e9e;display: none;"
+                class="border  border-primary rounded">
+                Your browser does not support the canvas element.
+            </canvas>
+        </div>
+
+    </div>
+    <script>
+        $('#btn-getSVG').on('click', function () {
+            $('#SVG-path').empty();
+            var svgPath = $('#svg-input')[0].value;
+            $('#SVG-path').append(svgPath);
+            $('svg').addClass('customPath');
+            mainFunc();
+        });
+        function hexToRgb(hex) {
+            var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? ("rgb(" + parseInt(result[1], 16) + "," + parseInt(result[2], 16) + "," + parseInt(result[3], 16) + ")") : null;
+        }
+        $('#btn-Copy').on('click', function () {
+            var copyText = $('#svg-object')[0];
+            copyText.select();
+            navigator.clipboard.writeText(copyText.value);
+            alert("Copied the text");
+        });
+        // Download Button
+        const object = document.getElementById("svg-object"),
+            fileNameInput = document.getElementById("fileName"),
+            saveBtn = document.getElementById("btn-Download");
+
+        saveBtn.addEventListener("click", () => {
+            const file = new Blob([object.value], { type: "application/json" });
+            const fileUrl = URL.createObjectURL(file);
+            const link = document.createElement("a");
+            link.download = fileNameInput.value;
+            link.href = fileUrl;
+            link.click();
+        });
+        // Download Button
+        function mainFunc() {
+            // Find svg
+            $('svg').find('rect:first').remove();
+            // remove first rect
+            var tmpSVG = $('svg')[0];
+            // start constructor
+            function cosItemObj(type, background, backgroundAlpha, centerX, centerY, xpoints, ypoints, width, height, direction, foreground, foregroundAlpha, fontFamily, fontStyle, fontWeight, lineWidth, txtColor, fontSize, id, positionOrder) {
+                this.type = "poly";
+                this.background = "rgb(242;232;212)";
+                this.backgroundAlpha = 255;
+                this.centerX = 100;
+                this.centerY = 100;
+                this.xpoints = [];
+                this.ypoints = [];
+                // "width= path[iPath].parentElement.width.baseVal.value;
+                this.width = 0;
+                this.height = 0;
+                this.direction = 0;
+                this.foreground = "rgb(0,0,0)";
+                this.foregroundAlpha = 255;
+                this.fontFamily = "Sans-Serif";
+                this.fontStyle = "Normal";
+                this.fontWeight = "Normal";
+                this.lineWidth = 4;
+                this.txtColor = "rgb(0,0,0)";
+                this.fontSize = 20;
+                this.id = "";
+                this.positionOrder = 201;
+            }
+            // end constructor
+            var cosmetic = {}
+            var pt;
+            var posX;
+            var posY;
+            // var path = document.getElementsByClassName('customPath');
+            var path = tmpSVG.children;
+            var pathLength;
+            var numRoughness = parseInt($('#num_roughness').val());
+            var numDivise = parseInt($('#num_divise').val());
+
+            for (let iPath = 0; iPath < path.length; iPath++) {
+                pathLength = Math.floor(path[iPath].getTotalLength());
+                posX = [''];
+                posY = [''];
+                cosmeticItem = new cosItemObj;
+
+                // init cosmesticItem
+                cosmeticItem.id = Math.round(Math.random() * 100);
+                cosmeticItem.width = path[iPath].getBoundingClientRect().width;
+                cosmeticItem.height = path[iPath].getBoundingClientRect().height;
+                cosmeticItem.centerX = (cosmeticItem.width / 4);
+                cosmeticItem.centerY = (cosmeticItem.height / 4);
+                (path[iPath].attributes.fill && path[iPath].attributes.fill.value != 'none') ? (cosmeticItem.background = hexToRgb(path[iPath].attributes.fill.value)) : (cosmeticItem.type = 'polyline');
+
+
+                // get xy and write to array
+                for (var index = 0; index < pathLength; index += numRoughness) {
+                    pt = path[iPath].getPointAtLength((index * pathLength) / numDivise);
+                    posY.push((pt.y).toFixed(2));
+                    posX.push((pt.x).toFixed(2));
+                    // }
+                }
+                // remove first empty element
+                posX.shift();
+                posY.shift();
+
+                // write xy to cosmestic item
+                cosmeticItem.xpoints = posX;
+                cosmeticItem.ypoints = posY;
+
+                // push to cosmestic collecttion
+                cosmetic[cosmeticItem.id] = cosmeticItem;
+                // Draw sample with roughness
+                var canvas = $('#roughSVG')[0];
+                // canvas.width = tmpSVG.width.baseVal.value;
+                // canvas.height = tmpSVG.height.baseVal.value;
+                var ctx = canvas.getContext("2d");
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.moveTo(parseInt(cosmeticItem.xpoints[0]), parseInt(cosmeticItem.ypoints[0]));
+                for (let i = 0; i < cosmeticItem.xpoints.length; i++) {
+                    ctx.lineTo(parseInt(cosmeticItem.xpoints[i]), parseInt(cosmeticItem.ypoints[i]));
+                }
+                ctx.stroke();
+                //
+            }
+            // Write string to text area, remove first { and last }
+            $('#svg-object').val(JSON.stringify(cosmetic).substring(1).slice(0, -1));
+            var cosmeticValue = JSON.stringify(cosmetic).substring(1).slice(0, -1);
+            var jsonContent = "{\n\"cosmetics\": {\n" + cosmeticValue + "\n},\n \"seats\": {},\n \"rows\": {},\n \"physicalBlocks\": {},\n \"physicalAreas\": {},\n \"physicalEntrances\": {},\n \"seatBlockCreator\": {},\n \"maxXMapSize\": 55679.71464330405,\n \"maxYMapSize\": 29954.02647552239,\n \"distanceFactor\":2\n }"
+            $('#svg-object').val(jsonContent);
+            // $('#svg-object').val(JSON.stringify(cosmestic, undefined, 4)); 
+        }
+    </script>
+</body>
+
+</html>

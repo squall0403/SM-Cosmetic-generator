@@ -1,0 +1,22 @@
+{
+  "name": "SM Cosmetic generator",
+  "id": "1301016221346553663",
+  "api": "1.0.0",
+  "main": "code.js",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "editorType": [
+    "figma"
+  ],
+  "ui": {
+    "main": "ui/ui.html",
+    "alert": "ui/alert.html",
+    "cosGen":"ui/cosGen.html"
+  },
+  "networkAccess": {
+    "allowedDomains": [
+      "*"
+    ],
+    "reasoning":"dev"
+  }
+}

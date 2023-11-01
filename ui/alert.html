@@ -1,0 +1,20 @@
+<style>
+  * {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+<h2 id="title"></h2>
+<p id="message"></p>
+<script>
+  onmessage = (message) => {
+    document.querySelector('#title').innerHTML = message.data.pluginMessage.title
+    document.querySelector('#message').innerHTML = message.data.pluginMessage.message
+  }
+</script>

@@ -1,0 +1,17 @@
+{
+  "name": "SM-Cosmetic-generator",
+  "version": "1.0.0",
+  "description": "STX Seat map Cosmetic generator",
+  "main": "code.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "watch": "npm run build -- --watch"
+  },
+  "author": "Duy, Nguyen Xuan Anh",
+  "license": "Creative Commons Attribution-ShareAlike 4.0 International License.",
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.80.0",
+    "@types/jquery": "^3.5.25",
+    "typescript": "*"
+  }
+}
