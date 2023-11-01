@@ -43,10 +43,10 @@ if (figma.currentPage.selection.length > 0) {
   };
   var groupSVG = []
   var newGroupSVG: string;
-  const node = figma.currentPage.selection[0]
-  
+  const node = figma.currentPage.selection[0] 
+
   if (node.type != 'GROUP') {
-    console.log(node.parent);
+
     const shapeFill = getFill(node)
     const shapeStroke = getStroke(node)
     const newShape = new SvgShape(node.width, node.height, shapeFill, shapeStroke, node.vectorPaths[0].data)
