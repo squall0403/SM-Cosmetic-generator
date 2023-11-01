@@ -1,40 +1,18 @@
-Below are the steps to get your plugin running. You can also find instructions at:
+**Prerequisite**
+ * NodeJS must be installed on your PC: https://nodejs.org/en/download/
 
-  https://www.figma.com/plugin-docs/plugin-quickstart-guide/
+**Getting git folder**
+ 1. Clone repo with Git: _git clone https://github.com/squall0403/SM-Cosmetic-generator.git_
+ 2. Shift + Right click on **SM Cosmetic generator** folder > Select **Open Powershell window**
+ 3. Run command: _npm i_
+**Install as Figma Plugin**
+ 1. Open Figma > Open a design > Right click > Plugin > Development > Import Plugin from Manifest
+ 2. Select **manifest.json** in SM-Cosmetic-generator folder
 
-This plugin template uses Typescript and NPM, two standard tools in creating JavaScript applications.
-
-First, download Node.js which comes with NPM. This will allow you to install TypeScript and other
-libraries. You can find the download link here:
-
-  https://nodejs.org/en/download/
-
-Next, install TypeScript using the command:
-
-  npm install -g typescript
-
-Finally, in the directory of your plugin, get the latest type definitions for the plugin API by running:
-
-  npm install --save-dev @figma/plugin-typings
-
-If you are familiar with JavaScript, TypeScript will look very familiar. In fact, valid JavaScript code
-is already valid Typescript code.
-
-TypeScript adds type annotations to variables. This allows code editors such as Visual Studio Code
-to provide information about the Figma API while you are writing code, as well as help catch bugs
-you previously didn't notice.
-
-For more information, visit https://www.typescriptlang.org/
-
-Using TypeScript requires a compiler to convert TypeScript (code.ts) into JavaScript (code.js)
-for the browser to run.
-
-We recommend writing TypeScript code using Visual Studio code:
-
-1. Download Visual Studio Code if you haven't already: https://code.visualstudio.com/.
-2. Open this directory in Visual Studio Code.
-3. Compile TypeScript to JavaScript: Run the "Terminal > Run Build Task..." menu item,
-    then select "npm: watch". You will have to do this again every time
-    you reopen Visual Studio Code.
-
-That's it! Visual Studio Code will regenerate the JavaScript file every time you save.
+**Using the plugin**
+The plugin only works with Vector shape (Created by **Creation tool**). In order to get Seatmap JSON file:
+1. Select Vector shape or;
+    Groupd Vectors into a Group > Select the Group
+2. Right click > Plugin > Development > SM Cosmetic generator
+3. Wait for the Plugin to be executed
+4. Click **Download JSON file** to export as Seat map JSON
