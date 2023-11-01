@@ -2,9 +2,12 @@
  * NodeJS must be installed on your PC: https://nodejs.org/en/download/
 
 **Getting git folder**
- 1. Clone repo with Git: ```git clone https://github.com/squall0403/SM-Cosmetic-generator.git```
- 2. Shift + Right click on **SM Cosmetic generator** folder > Select **Open Powershell window**
- 3. Run command:
+ 1. Clone repo with Git:
+    ```
+    git clone https://github.com/squall0403/SM-Cosmetic-generator.git
+    ```
+ 3. Shift + Right click on **SM Cosmetic generator** folder > Select **Open Powershell window**
+ 4. Run command:
     ```javascript
     npm i
     ```
