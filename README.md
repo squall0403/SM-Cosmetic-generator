@@ -18,7 +18,7 @@
 **Using the plugin**
 The plugin **ONLY** works with Vector shape (Created by **Creation tool**). In order to get Seatmap JSON file:
 1. Select Vector shape or;
-    Groupd Vectors into a Group > Select the Group
-2. Right click > Plugin > Development > SM Cosmetic generator
-3. Wait for the Plugin to be executed
-4. Click **Download JSON file** to export as Seat map JSON
+   Group Vectors into a Group > Select the Group
+3. Right click > Plugin > Development > SM Cosmetic generator
+4. Wait for the Plugin to be executed
+5. Click **Download JSON file** to export as Seat map JSON
