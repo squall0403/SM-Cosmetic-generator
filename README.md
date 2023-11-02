@@ -16,7 +16,7 @@
  2. Select **manifest.json** in SM-Cosmetic-generator folder
 
 **Using the plugin**
-The plugin only works with Vector shape (Created by **Creation tool**). In order to get Seatmap JSON file:
+The plugin **ONLY** works with Vector shape (Created by **Creation tool**). In order to get Seatmap JSON file:
 1. Select Vector shape or;
     Groupd Vectors into a Group > Select the Group
 2. Right click > Plugin > Development > SM Cosmetic generator
