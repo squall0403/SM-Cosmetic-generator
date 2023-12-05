@@ -15,7 +15,8 @@
   },
   "networkAccess": {
     "allowedDomains": [
-      "*"
+      "https://bootswatch.com",
+      "https://code.jquery.com"
     ],
     "reasoning":"dev"
   }
