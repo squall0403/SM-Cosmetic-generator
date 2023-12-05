@@ -1,5 +1,3 @@
-import { isEmptyObject } from "jquery";
-
 // check if any current vector is selected
 if (figma.currentPage.selection.length > 0) {
   function componentToHex(c: { toString: (arg0: number) => any; }) {
