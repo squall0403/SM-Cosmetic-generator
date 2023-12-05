@@ -1,3 +1,5 @@
+import { isEmptyObject } from "jquery";
+
 // check if any current vector is selected
 if (figma.currentPage.selection.length > 0) {
   function componentToHex(c: { toString: (arg0: number) => any; }) {
@@ -9,7 +11,7 @@ if (figma.currentPage.selection.length > 0) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
   }
   function getFill(node: VectorNode) {
-    if (node.fills.length) {
+      if (node.fills.length) {
       var shapeFill = node.fills[0].color
       shapeFill = rgbToHex(shapeFill.r, shapeFill.g, shapeFill.b)
     }

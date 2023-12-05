@@ -1,4 +1,3 @@
-"use strict";
 // check if any current vector is selected
 if (figma.currentPage.selection.length > 0) {
     function componentToHex(c) {
@@ -67,3 +66,4 @@ else {
     /*   figma.showUI(__uiFiles__.alert, { title: 'Failed to start' });
       figma.ui.postMessage({ title: "Warning", message: "Please select a shape to start" }) */
 }
+export {};
